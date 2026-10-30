@@ -5,6 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="light">
 <title>Analysis Blog</title>
+<meta name="description" content="Analysis and reactions on political science, current affairs, youth issues and governance, across Africa and around the world.">
+<meta property="og:title" content="Analysis Blog"><meta property="og:type" content="website">
+<meta property="og:description" content="Analysis and reactions on political science, current affairs, youth issues and governance.">
+<meta name="theme-color" content="#fff6ea">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%9C%8D%EF%B8%8F%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -51,9 +56,34 @@ article p{font-size:18px}
 .pic{display:block;width:100%;height:auto;border-radius:14px;margin:0 0 14px}
 .thumb{display:block;width:100%;max-height:220px;object-fit:cover;object-position:center 60%;border-radius:12px;margin:0 0 12px}
 footer{text-align:center;color:var(--mut);font:13px var(--sans);margin-top:44px}
+
+#prog{position:fixed;top:env(safe-area-inset-top,0px);left:0;height:3px;width:0;background:linear-gradient(90deg,var(--gold),var(--coral));z-index:40}
+.btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:22px}
+.btn{display:inline-block;padding:11px 22px;border-radius:99px;font:600 15px var(--sans);text-decoration:none;cursor:pointer;border:0}
+.btn.p{background:linear-gradient(90deg,var(--teal),var(--teal2));color:#fff;box-shadow:0 8px 20px rgba(14,124,116,.3)}
+.btn.s{background:#fff;color:var(--teal);border:1px solid var(--line)}
+.stats{display:flex;justify-content:center;gap:30px;margin:28px 0 4px;font:13px var(--sans);color:var(--mut);text-transform:uppercase;letter-spacing:.08em}
+.stats b{display:block;font:800 28px var(--serif);color:var(--ink);letter-spacing:0}
+.tools{margin:10px 0 4px}
+.tools input{width:100%;box-sizing:border-box;padding:13px 18px;border-radius:99px;border:1px solid var(--line);background:#fff;font:16px var(--sans);outline:none;box-shadow:0 4px 14px rgba(14,124,116,.06)}
+.tools input:focus{border-color:var(--teal)}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.chip{border:1px solid var(--line);background:#fff;border-radius:99px;padding:5px 14px;font:600 13px var(--sans);color:var(--teal);cursor:pointer;text-decoration:none}
+.chip.on{background:var(--teal);color:#fff;border-color:var(--teal)}
+.share{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:6px 0 18px}
+.share span{font:600 13px var(--sans);color:var(--mut);margin-right:4px}
+.empty{text-align:center;color:var(--mut)}
+.card{animation:up .5s both}
+@keyframes up{from{opacity:0;transform:translateY(14px)}}
+.top{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));width:46px;height:46px;border-radius:50%;border:0;background:var(--teal);color:#fff;font-size:20px;display:none;z-index:25;cursor:pointer;box-shadow:0 8px 20px rgba(14,124,116,.35)}
+.flinks{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin-bottom:12px;font-size:14px}
+.flinks a{text-decoration:none;font-weight:600}
+footer{border-top:1px solid var(--line);padding-top:22px}
 </style>
 </head>
 <body>
+<div id="prog"></div>
+<button class="top" id="top" aria-label="Back to top">↑</button>
 <div class="bar">
  <div class="bar-in">
   <a class="av" id="av" href="#home" aria-label="Home"></a>
@@ -69,7 +99,7 @@ footer{text-align:center;color:var(--mut);font:13px var(--sans);margin-top:44px}
 </div>
 <main>
 <div id="view"></div>
-<footer>© <span id="y"></span> Henoc Doukpane</footer>
+<footer><div class="flinks"><a href="#home">Articles</a><a href="#biography">Biography</a><a href="#themes">Themes</a><a href="#contact">Contact</a></div>© <span id="y"></span> Henoc Doukpane · All rights reserved</footer>
 </main>
 <script>
 /* ====== EDIT HERE ====== */
@@ -88,7 +118,7 @@ var ARTICLES=[
  body:["Welcome to Analysis Blog, a space devoted to thinking carefully about the political questions that shape our societies.","Here I offer analyses and reactions on political science, current affairs, youth issues and governance, across Africa and beyond: the ideas, the institutions and the choices that decide how power is exercised and whose voices are heard.","Young people are not only the future; they are a force of the present. This blog treats youth issues with the seriousness they deserve, and looks at governance with a demanding eye, asking for transparency, accountability and genuine participation.","I will write as events call for it, with one aim: to inform, to question and to open a conversation. You are warmly invited to read, reflect and share."]}
 ];
 /* ======================== */
-var v=document.getElementById("view"),menu=document.getElementById("menu"),burger=document.getElementById("burger");
+var v=document.getElementById("view"),menu=document.getElementById("menu"),burger=document.getElementById("burger"),prog=document.getElementById("prog"),topb=document.getElementById("top");
 document.getElementById("y").textContent=new Date().getFullYear();
 function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;")}
 function avatar(el){el.textContent=INITIALS;var i=new Image();i.alt=NAME;i.onload=function(){el.textContent="";el.appendChild(i)};i.src=PHOTO}
@@ -96,20 +126,40 @@ avatar(document.getElementById("av"));
 burger.onclick=function(){var o=menu.classList.toggle("open");burger.setAttribute("aria-expanded",o)};
 function paras(a){return a.map(function(p){return"<p>"+esc(p)+"</p>"}).join("")}
 function tag(a){return'<span class="tag'+(a.lang==="fr"?" fr":"")+'">'+esc(a.tag)+'</span>'}
+function mins(a){return Math.max(1,Math.round(a.body.join(" ").split(/\s+/).length/200))+" min read"}
+function meta(a){return'<span class="meta">'+esc(a.date)+' · '+mins(a)+'</span>'}
+function cardHtml(a){return'<a class="card-link" href="#'+a.id+'"><div class="card"'+(a.lang?' lang="'+a.lang+'"':'')+'>'+(a.img?'<img class="thumb" src="'+a.img+'" alt="">':'')+tag(a)+meta(a)+'<h2>'+esc(a.title)+'</h2><p>'+esc(a.body[0])+'</p><span class="more">Read →</span></div></a>'}
+var st={q:"",t:"All"};
+function drawList(){var l=document.getElementById("list"),c=document.getElementById("chips");if(!l)return;
+ var q=st.q.toLowerCase();
+ var r=ARTICLES.filter(function(a){return(st.t==="All"||a.tag===st.t)&&(!q||(a.title+" "+a.body.join(" ")).toLowerCase().indexOf(q)>-1)});
+ l.innerHTML=r.length?r.map(cardHtml).join(""):'<p class="empty">No articles found.</p>';
+ var tags=["All"];ARTICLES.forEach(function(a){if(tags.indexOf(a.tag)<0)tags.push(a.tag)});
+ c.innerHTML=tags.map(function(t){return'<button class="chip'+(t===st.t?" on":"")+'" data-t="'+esc(t)+'">'+esc(t)+'</button>'}).join("");
+ Array.prototype.forEach.call(c.querySelectorAll(".chip"),function(b){b.onclick=function(){st.t=b.getAttribute("data-t");drawList()}})}
+function shareHtml(a){var u=location.href.split("#")[0]+"#"+a.id,e=encodeURIComponent,t=e(a.title);
+ return'<div class="share"><span>Share</span><a class="chip" target="_blank" rel="noopener" href="https://wa.me/?text='+t+'%20'+e(u)+'">WhatsApp</a><a class="chip" target="_blank" rel="noopener" href="https://www.linkedin.com/sharing/share-offsite/?url='+e(u)+'">LinkedIn</a><a class="chip" target="_blank" rel="noopener" href="https://twitter.com/intent/tweet?text='+t+'&url='+e(u)+'">X</a><a class="chip" target="_blank" rel="noopener" href="https://www.facebook.com/sharer/sharer.php?u='+e(u)+'">Facebook</a><button class="chip" id="cp" data-u="'+u+'">Copy link</button></div>'}
+function wireCopy(){var b=document.getElementById("cp");if(!b)return;b.onclick=function(){var u=b.getAttribute("data-u");try{navigator.clipboard.writeText(u).then(function(){b.textContent="Copied ✓"})}catch(e){window.prompt("Copy this link:",u)}}}
 function render(){
  menu.classList.remove("open");burger.setAttribute("aria-expanded","false");
  var k=(location.hash||"#home").slice(1),h="";
- if(k==="biography"){h='<div class="card" style="text-align:center"><div class="bio-av" id="bav"></div><h1 class="page">'+esc(NAME)+'</h1><div style="text-align:left">'+paras(BIO)+'</div></div>'}
+ if(k==="biography"){h='<div class="card" style="text-align:center"><div class="bio-av" id="bav"></div><h1 class="page">'+esc(NAME)+'</h1><div style="text-align:left">'+paras(BIO)+'</div><div class="btns"><a class="btn p" href="mailto:'+CONTACT+'">Get in touch</a><a class="btn s" href="#home">Read my articles</a></div></div>'}
  else if(k==="themes"){h='<h3 class="sec">Themes</h3>'+THEMES.map(function(t){return'<div class="card hov"><h2>'+esc(t[0])+'</h2><p>'+esc(t[1])+'</p></div>'}).join("")}
- else if(k==="contact"){h='<h3 class="sec">Contact</h3><div class="card"><p style="margin:0;color:var(--ink)">To get in touch, write to <a href="mailto:'+CONTACT+'">'+CONTACT+'</a></p></div>'}
+ else if(k==="contact"){h='<h3 class="sec">Contact</h3><div class="card"><p style="margin:0 0 6px">Questions, ideas or collaboration proposals are always welcome.</p><p style="margin:0"><a href="mailto:'+CONTACT+'">'+CONTACT+'</a></p><div class="btns" style="justify-content:flex-start"><a class="btn p" href="mailto:'+CONTACT+'">Send an email</a></div></div>'}
  else{
   var a=ARTICLES.filter(function(x){return x.id===k})[0];
-  if(a){h='<a class="back" href="#home">← All articles</a><article'+(a.lang?' lang="'+a.lang+'"':'')+'><div>'+tag(a)+'<span class="meta">'+esc(a.date)+'</span></div><h1 class="page">'+esc(a.title)+'</h1><div class="card">'+(a.img?'<img class="pic" src="'+a.img+'" alt="">':'')+paras(a.body)+'</div></article>'}
-  else{h='<section class="hero"><span class="kick">Blog</span><h1>Analysis Blog</h1><p>'+esc(TAGLINE)+'</p><div class="rule"></div></section><h3 class="sec">Latest articles</h3>'+ARTICLES.map(function(a){return'<a class="card-link" href="#'+a.id+'"><div class="card"'+(a.lang?' lang="'+a.lang+'"':'')+'>'+(a.img?'<img class="thumb" src="'+a.img+'" alt="">':'')+tag(a)+'<span class="meta">'+esc(a.date)+'</span><h2>'+esc(a.title)+'</h2><p>'+esc(a.body[0])+'</p><span class="more">'+"Read"+' →</span></div></a>'}).join("")}
+  if(a){var more=ARTICLES.filter(function(x){return x.id!==a.id}).slice(0,2);
+   h='<a class="back" href="#home">← All articles</a><article'+(a.lang?' lang="'+a.lang+'"':'')+'><div>'+tag(a)+meta(a)+'</div><h1 class="page">'+esc(a.title)+'</h1>'+shareHtml(a)+'<div class="card">'+(a.img?'<img class="pic" src="'+a.img+'" alt="">':'')+paras(a.body)+'</div></article>'+(more.length?'<h3 class="sec">Keep reading</h3>'+more.map(cardHtml).join(""):'')}
+  else{var tg={};ARTICLES.forEach(function(x){tg[x.tag]=1});
+   h='<section class="hero"><span class="kick">Blog</span><h1>Analysis Blog</h1><p>'+esc(TAGLINE)+'</p><div class="btns"><a class="btn p" href="#'+ARTICLES[0].id+'">Read the latest</a><a class="btn s" href="#biography">About me</a></div><div class="stats"><div><b>'+ARTICLES.length+'</b>Articles</div><div><b>'+THEMES.length+'</b>Themes</div><div><b>Africa</b>& beyond</div></div><div class="rule"></div></section><h3 class="sec">Latest articles</h3><div class="tools"><input id="q" type="search" placeholder="Search articles…" aria-label="Search articles"><div class="chips" id="chips"></div></div><div id="list"></div>'}
  }
  v.innerHTML=h;
  var b=document.getElementById("bav");if(b)avatar(b);
- window.scrollTo(0,0)}
+ var q=document.getElementById("q");if(q){q.value=st.q;q.oninput=function(){st.q=q.value;drawList()};drawList()}
+ wireCopy();window.scrollTo(0,0);onScroll()}
+function onScroll(){var d=document.documentElement,m=d.scrollHeight-d.clientHeight,y=window.pageYOffset||d.scrollTop;prog.style.width=(m>0?Math.min(100,y/m*100):0)+"%";topb.style.display=y>500?"block":"none"}
+window.addEventListener("scroll",onScroll,{passive:true});
+topb.onclick=function(){window.scrollTo({top:0,behavior:"smooth"})};
 window.addEventListener("hashchange",render);render();
 </script>
 </body>
