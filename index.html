@@ -130,7 +130,7 @@ main{max-width:980px}
 .grid .card{margin:0}
 .banner{background:linear-gradient(135deg,rgba(14,124,116,.16),rgba(242,169,59,.2))}
 .cta{text-align:center;margin-top:30px}
-@media(min-width:820px){.hero2{grid-template-columns:1.3fr .8fr;text-align:left;padding:56px 0 18px}.hero2 p{margin-left:0}.hero2 .btns{justify-content:flex-start!important}}
+@media(min-width:820px){.hero2{padding:56px 0 18px}}
 @media(min-width:1000px){.burger{display:none}.menu{display:flex!important;position:static;padding:0!important;background:none!important;gap:2px;margin-right:6px}.bar .menu a,:root[data-theme="dark"] .bar .menu a{background:none;border:0;box-shadow:none;margin:0;padding:8px 12px;font-size:15px}}
 </style>
 <script>var _t;try{_t=localStorage.getItem("theme")}catch(e){}document.documentElement.setAttribute("data-theme",_t||"dark")</script>
@@ -211,7 +211,7 @@ function wireCopy(){var b=document.getElementById("cp");if(!b)return;b.onclick=f
 function sec(t){return'<h3 class="sec">'+t+'</h3>'}
 function themeCard(t){return'<div class="card hov"><h2>'+esc(t[0])+'</h2><p>'+esc(t[1])+'</p></div>'}
 function homeHtml(){
- return'<section class="hero2"><div><span class="kick">Political Scientist</span><h1>'+esc(NAME)+'</h1><p class="role">Africa · Youth · Governance</p><p>'+esc(TAGLINE)+'</p><div class="btns"><a class="btn p" href="#writing">Read my writing</a><a class="btn s" href="#about">About me</a></div></div><div class="hph" id="hph"></div></section>'
+ return'<section class="hero2"><div><span class="kick">Political Scientist</span><h1>'+esc(NAME)+'</h1><p class="role">Africa · Youth · Governance</p><p>'+esc(TAGLINE)+'</p><div class="btns"><a class="btn p" href="#writing">Read my writing</a><a class="btn s" href="#about">About me</a></div></div></section>'
  +'<div class="creds"><div><b>Master 2</b>Political Science</div><div><b>Agenda 2063</b>Contributor, African Union</div><div><b>Africa</b>&amp; current affairs</div></div>'
  +sec("What I work on")+'<div class="grid">'+THEMES.map(themeCard).join("")+'</div>'
  +'<a class="card-link" href="#agenda-2063"><div class="card banner" style="margin-top:20px"><span class="tag">Agenda 2063</span><h2>The Africa We Want</h2><p>A fifty-year continental vision of an integrated, prosperous and peaceful Africa, driven by its own citizens.</p><span class="more">Explore →</span></div></a>'
