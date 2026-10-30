@@ -79,7 +79,32 @@ footer{text-align:center;color:var(--mut);font:13px var(--sans);margin-top:44px}
 .flinks{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin-bottom:12px;font-size:14px}
 .flinks a{text-decoration:none;font-weight:600}
 footer{border-top:1px solid var(--line);padding-top:22px}
+
+:root[data-theme="dark"]{color-scheme:dark;--ink:#eef3f2;--mut:#a7b7b4;--teal:#2dd4bf;--teal2:#5eead4;--gold:#f5b94a;--coral:#ff7a63;--card:rgba(22,31,44,.72);--line:rgba(94,234,212,.18)}
+:root[data-theme="dark"] body{background:radial-gradient(900px 520px at 92% -10%,rgba(245,185,74,.24),transparent 60%),radial-gradient(800px 600px at -10% 8%,rgba(45,212,191,.22),transparent 55%),radial-gradient(700px 500px at 50% 110%,rgba(255,122,99,.12),transparent 60%),linear-gradient(180deg,#0b1118 0,#101a27 55%,#0c131d 100%);background-attachment:fixed}
+:root[data-theme="dark"] body::before{background:#0b1118}
+:root[data-theme="dark"] body::after{content:"";position:fixed;inset:-20%;z-index:-1;pointer-events:none;background:radial-gradient(480px 380px at 20% 30%,rgba(45,212,191,.13),transparent 60%),radial-gradient(520px 400px at 80% 70%,rgba(245,185,74,.11),transparent 60%);animation:drift 22s ease-in-out infinite alternate}
+@keyframes drift{to{transform:translate3d(4%,3%,0) scale(1.1)}}
+:root[data-theme="dark"] .bar{background:rgba(11,17,24,.78)}
+:root[data-theme="dark"] .av,:root[data-theme="dark"] .bio-av{color:#06231f;box-shadow:0 0 0 3px #0b1118,0 0 0 5px var(--gold),0 0 24px rgba(245,185,74,.35)}
+:root[data-theme="dark"] .burger,:root[data-theme="dark"] .mode{background:rgba(255,255,255,.06);box-shadow:none}
+:root[data-theme="dark"] .burger span{background:var(--teal2)}
+:root[data-theme="dark"] .menu a{background:rgba(255,255,255,.05);box-shadow:none}
+:root[data-theme="dark"] .hero .kick{background:rgba(255,255,255,.08);color:var(--gold);box-shadow:none}
+:root[data-theme="dark"] .hero h1{background:linear-gradient(100deg,#5eead4 0,#f5b94a 60%,#ff7a63 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+:root[data-theme="dark"] .card{border-color:rgba(255,255,255,.09);box-shadow:0 12px 32px rgba(0,0,0,.4);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+:root[data-theme="dark"] a.card-link:hover .card,:root[data-theme="dark"] .card.hov:hover{box-shadow:0 18px 40px rgba(0,0,0,.5),0 0 0 1px rgba(94,234,212,.35)}
+:root[data-theme="dark"] .tools input{background:rgba(255,255,255,.06);color:var(--ink);box-shadow:none}
+:root[data-theme="dark"] .chip{background:rgba(255,255,255,.05)}
+:root[data-theme="dark"] .chip.on{background:var(--teal);color:#06231f}
+:root[data-theme="dark"] .btn.s{background:rgba(255,255,255,.06);color:var(--teal2)}
+:root[data-theme="dark"] .btn.p{background:linear-gradient(90deg,var(--teal),var(--gold));color:#06231f;box-shadow:0 8px 24px rgba(45,212,191,.28)}
+:root[data-theme="dark"] .tag{color:#06231f;background:linear-gradient(90deg,var(--teal),var(--teal2))}
+:root[data-theme="dark"] .tag.fr{background:linear-gradient(90deg,var(--gold),var(--coral))}
+:root[data-theme="dark"] .top{color:#06231f}
+.mode{width:46px;height:46px;border:1px solid var(--line);background:#fff;border-radius:12px;font-size:20px;cursor:pointer;padding:0;color:var(--teal)}
 </style>
+<script>var _t;try{_t=localStorage.getItem("theme")}catch(e){}document.documentElement.setAttribute("data-theme",_t||"dark")</script>
 </head>
 <body>
 <div id="prog"></div>
@@ -88,6 +113,7 @@ footer{border-top:1px solid var(--line);padding-top:22px}
  <div class="bar-in">
   <a class="av" id="av" href="#home" aria-label="Home"></a>
   <a class="brand" href="#home">Analysis Blog</a>
+  <button class="mode" id="mode" aria-label="Switch light or dark mode"></button>
   <button class="burger" id="burger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
  </div>
  <nav class="menu" id="menu">
@@ -160,6 +186,10 @@ function render(){
 function onScroll(){var d=document.documentElement,m=d.scrollHeight-d.clientHeight,y=window.pageYOffset||d.scrollTop;prog.style.width=(m>0?Math.min(100,y/m*100):0)+"%";topb.style.display=y>500?"block":"none"}
 window.addEventListener("scroll",onScroll,{passive:true});
 topb.onclick=function(){window.scrollTo({top:0,behavior:"smooth"})};
+var modeb=document.getElementById("mode");
+function modeIcon(){modeb.textContent=document.documentElement.getAttribute("data-theme")==="dark"?"☀":"☾"}
+modeb.onclick=function(){var t=document.documentElement.getAttribute("data-theme")==="dark"?"light":"dark";document.documentElement.setAttribute("data-theme",t);try{localStorage.setItem("theme",t)}catch(e){}modeIcon()};
+modeIcon();
 window.addEventListener("hashchange",render);render();
 </script>
 </body>
